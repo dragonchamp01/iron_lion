@@ -37,7 +37,7 @@ jmenu()
 	
 	
 
-public void PrintMenu()
+private void PrintMenu()
 {
 
 
@@ -46,28 +46,71 @@ System.out.print("================================= \r\n");
 System.out.print("1: port scan enter  range x.x.x.x.x/256 \r\n");
 System.out.print("2: enter sql query \r\n");
 System.out.print("3: exploit ftp :enter hostip \r\n");
+System.out.print("4: exit \r\n");
 
 
 }
 	
 	
-public void ReadInput()
+public void RunMenu()
 		throws IOException {
 			InputStreamReader isr =	new InputStreamReader(System.in);
 			BufferedReader br = new BufferedReader(isr);
-		
+
+			
+			PortScanner m_portscanner=new PortScanner();
+			
+			
+			PrintMenu();		
 			menu_input = br.readLine();
+
+// port scan			
+// stores results in hacker db.
+			
 if(menu_input=="1")
 {
 System.out.print("-->");
 cmd_Input=br.readLine();
+m_portscanner.NmapScan("nmap",cmd_Input,"-sV ");
+
+}			
+
+// sql query
+else if(menu_input=="2")
+{
+System.out.print("-->");
+cmd_Input=br.readLine();
+
 // do something with cmd_input
 
 
 }			
-			
-			//	System.out.println(input);
-			
+
+//exploit host
+else if(menu_input=="3")
+{
+System.out.print("-->");
+cmd_Input=br.readLine();
+//do something with cmd_input
+
+
+}			
+
+//exit
+else if(menu_input=="3")
+{
+//System.out.print("-->");
+//cmd_Input=br.readLine();
+//do something with cmd_input
+
+
+}			
+
+
+
+
+
+
 }
 
 
