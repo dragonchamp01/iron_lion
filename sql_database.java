@@ -9,7 +9,9 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 
 public class sql_database {
@@ -124,7 +126,7 @@ public void InstallDb()
 public void insertVaribleIntoReconTable(String ipadress, String hostname, String service,String port, String status,String os)
 {
 	  
-	String sql="INSERT INTO recon (ipadress,hostname,port,service,os) VALUES(?,?,?,?,?,?)";  
+	String sql="INSERT INTO recon (ipadress,hostname,port,service,status,os) VALUES(?,?,?,?,?,?,?)";  
 
 	try (
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -198,36 +200,63 @@ return false;
 // open db enumerate records.
 public void exportDbToHtml()
 {
+	 String sql ="SELECT ipadress,hostname,port,service,status,os FROM recon";
+	 
+	if( IsDatabaseOpen()==false)
+		OpenHackerDb();
 	
-// export entire database to hackerdb.html
+    Statement stmt = null;
+    ResultSet rs=null;
+    
+    
+    try {
+		stmt = conn.createStatement();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+    try {
+	 rs    = stmt.executeQuery(sql);
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+    
+    // export entire database to hackerdb.html
 	HtmlWriter hwriter=new HtmlWriter("hackerdb.html");
 	hwriter.WriteHTmlBegin("hacker db dump");
-  //hwriter.WriteLine(null);
+  hwriter.WriteLine("<center><table border=1><tr><th>ipadress</th><th>hostname</th><th>port</th><th>service</th><th>status</th><th>os</th></tr>");
 
+	
+
+	 try {
+		while (rs.next()) {
+
+			hwriter.WriteLine("<tr>");
+			hwriter.WriteLine("<td>"+rs.getString("ipadress") + "</td>");
+			hwriter.WriteLine("<td>"+rs.getString("hostname") + "</td>");
+			hwriter.WriteLine("<td>"+rs.getString("port") + "</td>");
+			hwriter.WriteLine("<td>"+rs.getString("service") + "</td>");
+			hwriter.WriteLine("<td>"+rs.getString("status") + "</td>");
+			hwriter.WriteLine("<td>"+rs.getString("os") + "</td>");
+
+			hwriter.WriteLine("</tr>");				
+			
+		}
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}	
+	
+		hwriter.WriteLine("</table></center>");				
+		
+	
+hwriter.WriteHtmlEnd();
+
+	
+	
 
 }
-
-
-/*
- * 
- *   public void selectAll(){
-        String sql = "SELECT id, name, capacity FROM warehouses";
-        
-        try (Connection conn = this.connect();
-             Statement stmt  = conn.createStatement();
-             ResultSet rs    = stmt.executeQuery(sql)){
-            
-            // loop through the result set
-            while (rs.next()) {
-                System.out.println(rs.getInt("id") +  "\t" + 
-                                   rs.getString("name") + "\t" +
-                                   rs.getDouble("capacity"));
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
- */
 
 
 

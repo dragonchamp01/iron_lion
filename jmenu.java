@@ -75,13 +75,14 @@ m_portscanner.NmapScan("nmap",cmd_Input,"-sV ");
 
 }			
 
-// sql query
+// export db to html
 else if(menu_input=="2")
 {
-System.out.print("-->");
-cmd_Input=br.readLine();
-
+System.out.print("exporting to html --> \r\n");
+//cmd_Input=br.readLine();
+m_DB.exportDbToHtml();
 // do something with cmd_input
+System.out.print("data exported --> \r\n");
 
 
 }			
