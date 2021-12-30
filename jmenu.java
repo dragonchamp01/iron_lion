@@ -44,8 +44,8 @@ private void PrintMenu()
 System.out.print("Iron lion project v1.0 \r\n");
 System.out.print("================================= \r\n");
 System.out.print("1: port scan enter  range x.x.x.x.x/256 \r\n");
-System.out.print("2: enter sql query \r\n");
-System.out.print("3: exploit ftp :enter hostip \r\n");
+System.out.print("2: export hacker db to html file \r\n");
+System.out.print("3: exploit ftp :enter hostname \r\n");
 System.out.print("4: exit \r\n");
 
 
@@ -59,7 +59,7 @@ public void RunMenu()
 
 			
 			PortScanner m_portscanner=new PortScanner();
-			
+			xploitframework  xploit=null;
 			
 			PrintMenu();		
 			menu_input = br.readLine();
@@ -87,18 +87,22 @@ System.out.print("data exported --> \r\n");
 
 }			
 
-//exploit host
+//exploit ftp host
 else if(menu_input=="3")
 {
 System.out.print("-->");
 cmd_Input=br.readLine();
 //do something with cmd_input
+xploit.ExploitFtpByName(cmd_Input);
+
+
+
 
 
 }			
 
 //exit
-else if(menu_input=="3")
+else if(menu_input=="4")
 {
 //System.out.print("-->");
 //cmd_Input=br.readLine();

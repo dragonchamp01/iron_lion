@@ -1,6 +1,7 @@
 package multi_purpose_hacking_project;
 
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 // this is SWORDFISH......FRONTLINE=SWORDFISH.
 // marco.
@@ -56,7 +57,7 @@ public class xploitframework {
 	
 	
 	
-	void exploitpop3(InetAddress ip)
+public	void ExploitPop3ByAdress(InetAddress ip)
 	{
 		// pop3 exploit
 
@@ -82,9 +83,34 @@ public class xploitframework {
 	
 	
 	
+public void ExploitPop3ByName(String host)
+{
+	
+	InetAddress ip=null;
+	try {
+		ip.getByName(host);
+	} catch (UnknownHostException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+
+
+
+
+ExploitPop3ByAdress(ip);
+
+
+}
 	
 	
-	void exploitFtp(InetAddress ip)
+	
+	
+	
+	
+	
+	
+public	void ExploitFtpByAdress(InetAddress ip)
 	{
 		// pop3 exploit
 
@@ -124,7 +150,26 @@ FTP server: 230 Login successful.
 	}
 	
 	
-	
+	public void ExploitFtpByName(String host)
+	{
+		
+		InetAddress ip=null;
+		try {
+			ip.getByName(host);
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+
+
+
+
+		ExploitFtpByAdress(ip);
+
+
+	}
+			
 	
 	
 	
